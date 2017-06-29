@@ -1,0 +1,76 @@
+﻿@*@model IEnumerable<WebApplication3.Models.Comment>*@
+@model WebApplication3.ViewModel.CommentViewModel
+
+
+@*@model WebApplication3.ViewModel.CommentViewModel*@
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="inner padTop">
+    <h2>Comments</h2>
+    <section>
+        <table>
+            @*<thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Name</th>
+                </tr>
+            </thead>*@
+            <tbody>
+                @if (Model.Comment != null)
+                {
+                @foreach (var item in Model.Comment)
+                {
+                    <tr>
+                        <td>@item.Message</td>
+                        <td>@item.Name</td>
+                    </tr>
+                }
+                }
+            </tbody>
+            @*<tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td>100.00</td>
+                </tr>
+            </tfoot>*@
+        </table>
+    </section>
+    <h2 style="padding-top:10px">Leave a Comment</h2>
+    <div>Only the last 10 are displayed, and duplicates are trashed.</div><br/>
+    <section >
+        @*<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+            <div class="">
+                <label for="name">Your name:</label>
+                <input id="name" class="input" name="name" type="text" value="" size="30" /><br />
+            </div>
+            <div class="">
+                <label for="message">Your Comment:</label>
+                <textarea id="message" class="input" name="message" rows="2" cols="30"></textarea><br />
+            </div>
+            <input id="submit_button" class="button special" type="submit" value="Post Comment" />
+        </form>*@
+
+        <form id="contact_form" action="#" method="POST">
+                <div class="">
+                    <label asp-for="Name"></label><span asp-validation-for="Name"></span>
+                    <input asp-for="Name" id="name" class="input" type="text" size="30" /><br />
+                </div>
+                
+                <div class="">
+                    <label asp-for="Message"></label><span asp-validation-for="Message"></span>
+                    <textarea asp-for="Message" class="input" rows="2" cols="30"></textarea><br />
+                </div>
+                <input id="submit_button" class="button special" type="submit" value="Post Comment" />
+            </form>
+
+    </section>		
+</div>

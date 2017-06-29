@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DBContextConnection": "Server=192.168.2.26,1433\\sqlexpress;Database=website;User ID=website;Password=website;Trusted_Connection=true;MultipleActiveResultSets=true"
+  }
+}

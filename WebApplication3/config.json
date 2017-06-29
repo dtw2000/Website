@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "CommentContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=website.dbo.Comment;Trusted_Connection=true;MultipleActiveResultSets=true",
+    "DBContextConnection": "Server=127.0.0.1,1433\\sqlexpress;Database=website;User ID=website;Password=website;Trusted_Connection=true;MultipleActiveResultSets=true"
+  }
+}

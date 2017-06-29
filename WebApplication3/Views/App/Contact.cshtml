@@ -1,0 +1,27 @@
+﻿@model WebApplication3.ViewModel.ContactViewModel
+@{
+    ViewBag.Title = "Contact Me";
+}
+
+@section scripts { 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+    <div class="inner padTop">
+        <h2>Leave a Message</h2>
+        <form id="contact_form" action="#" method="POST">
+            <div class="">
+                <label asp-for="Name"></label><span asp-validation-for="Name"></span>
+                <input asp-for="Name" id="name" class="input" type="text" size="30" /><br />    
+            </div>
+            <div class="">
+                <label asp-for="Email"></label><span asp-validation-for="Email"></span>
+                <input asp-for="Email" id="email" class="input" type="text" value="" size="30" /><br />
+            </div>
+            <div class="">
+                <label asp-for="Message"></label><span asp-validation-for="Message"></span>
+                <textarea asp-for="Message" class="input" rows="4" cols="30"></textarea><br />
+            </div>
+            <input id="submit_button" class="button special" type="submit" value="Send Message" />
+        </form>
+    </div>			
