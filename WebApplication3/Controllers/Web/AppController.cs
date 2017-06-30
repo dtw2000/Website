@@ -46,7 +46,8 @@ namespace WebApplication3.Controllers.Web
         {
             Comment c = (Comment) model;
             _commentRepo.Add(c);
-            return Comments();
+            //return Comments();
+            return RedirectToAction("Comments", "App");
         }
         public IActionResult Comments()
         {

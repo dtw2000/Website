@@ -71,6 +71,12 @@ namespace WebApplication3.Models
 
             if (data.Any(x => x.Name == c.Name && x.Message == c.Message))
             {
+                //ignore re-post
+                if (data.Last().Name == c.Name && data.Last().Message == c.Message)
+                {
+                    return;
+                }
+
                 foreach (Comment e in data)
                 {
                     if (e.Name == c.Name && e.Message == c.Message)
@@ -86,6 +92,7 @@ namespace WebApplication3.Models
                 _context.Comment.Add(c);
                 _context.SaveChanges();
             }
+
             return;
         }
     }

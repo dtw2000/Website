@@ -31,8 +31,6 @@ namespace WebApplication3.Models
             if (Name is null || Message is null)
                 result = false;
             return result;
-        }
-        
-        
+        }      
     }
 }
