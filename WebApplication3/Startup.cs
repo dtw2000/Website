@@ -34,7 +34,8 @@ namespace WebApplication3
         {
             services.AddSingleton(_config);
             services.AddMvc();
-            services.AddDbContext<MyDBContext>();
+            services.AddScoped<ICommentRepository,CommentRepository>();
+            services.AddDbContext<WebsiteDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +45,7 @@ namespace WebApplication3
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage(); 
             }
 
            // app.UseDefaultFiles();
@@ -52,12 +53,49 @@ namespace WebApplication3
 
             app.UseMvc(config =>
             {
+
+                config.MapRoute(
+                     name: "index",
+                     template: "",
+                     defaults: new { controller = "App", action = "Index" }
+                     );
+
+                config.MapRoute(
+                    name: "apiComments",
+                    template: "api/comments/{id?}",
+                    defaults: new { controller = "Comments", action = "ApiComments" }
+                    );
+
+                config.MapRoute(
+                    name: "comments",
+                    template: "comments/{id?}",
+                    defaults: new { controller = "App", action = "Comments" }
+                    );
+
+                config.MapRoute(
+                    name: "contact",
+                    template: "contact/{id?}",
+                    defaults: new { controller = "App", action = "Contact" }
+                    );
+
+                config.MapRoute(
+                    name: "resume",
+                    template: "resume/{id?}",
+                    defaults: new { controller = "App", action = "Resume" }
+                    );
+
+                config.MapRoute(
+                    name: "thanks",
+                    template: "thanks/{id?}",
+                    defaults: new { controller = "App", action = "Thanks" }
+                    );
+
                 config.MapRoute(
                     name: "Default",
                     //template: "{controller}/{action}/{id?}",
                     //defaults: new { controller = "App", action = "Index" }
-                    template: "{action}/{id?}",
-                    defaults: new { controller = "App", action = "Index" }
+                    template: "{id?}",
+                    defaults: new { controller = "App", action = "Redirect" }
                     );
             });
 

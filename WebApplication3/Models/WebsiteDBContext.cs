@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace WebApplication3.Models
 {
-    public class MyDBContext : DbContext
+    public class WebsiteDBContext : DbContext
     {
         private IConfigurationRoot _config;
         //public bool _local { get; set; }
         
-        public MyDBContext(IConfigurationRoot  config, DbContextOptions options) : base()
+        public WebsiteDBContext(IConfigurationRoot  config, DbContextOptions options) : base()
         {
             _config = config;
             //_local = true;

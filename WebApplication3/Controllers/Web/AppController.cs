@@ -13,15 +13,14 @@ namespace WebApplication3.Controllers.Web
     public class AppController : Controller
     {
         private IConfigurationRoot _config;
-        private MyDBContext _context;
-
-        //public bool _local = false;
-
-        public AppController(IConfigurationRoot config, MyDBContext context)
+        private WebsiteDBContext _context;
+        private ICommentRepository _commentRepo;
+        
+        public AppController(IConfigurationRoot config, WebsiteDBContext context, ICommentRepository commentRepo)
         {
             _config = config;
             _context = context;
-            //_context._local = _local;
+            _commentRepo = commentRepo;
         }
 
         public IActionResult Index()
@@ -36,68 +35,26 @@ namespace WebApplication3.Controllers.Web
         {
             return View();
         }
-        public IActionResult ThankYou()
+        public IActionResult Thanks()
         {
             return View();
         }
+
+
         [HttpPost]
         public IActionResult Comments(CommentViewModel model)
         {
-            Comment c = (Comment)model;
-            var data = _context.Comment.ToList();
-
-            if (c.Name.ToLower() == "delete" && data.Any(x => x.Message == c.Message))
-            {
-                foreach (Comment e in data)
-                {
-                    if (e.Message == c.Message)
-                    {
-                        _context.Comment.Remove(e);
-                    }
-                }
-                _context.SaveChanges();
-                return Comments();
-            }
-
-            if (data.Any(x => x.Name == c.Name && x.Message == c.Message))
-            {
-                foreach (Comment e in data)
-                {
-                    if (e.Name == c.Name && e.Message == c.Message)
-                    {
-                        _context.Comment.Remove(e);
-                    }
-                }
-                _context.SaveChanges();
-            }
-
-            if (c.isPostable())
-            {
-                _context.Comment.Add(c);
-                _context.SaveChanges();
-            }
-
+            Comment c = (Comment) model;
+            _commentRepo.Add(c);
             return Comments();
         }
-
-
         public IActionResult Comments()
         {
-            var data = _context.Comment.ToList();
-            var num = data.Count;
-            var maxNum = 10;
-
-            if (num > maxNum)
-            {
-                data.RemoveAt(0);
-                data.RemoveRange(0, num - maxNum - 1);
-            }
-            data.Reverse();
-            
             var vm = new CommentViewModel();
-            vm.Comment = data;
+            vm.Comment = _commentRepo.GetComments(6, true,"") ;
             return View(vm);
         }
+
 
         [HttpPost]
         public IActionResult Contact(ContactViewModel model)
@@ -105,11 +62,16 @@ namespace WebApplication3.Controllers.Web
             Contact c = (Contact)model;
             _context.Add(c);
             _context.SaveChanges();
-            return View("~/Views/App/ThankYou.cshtml");
+            return View("~/Views/App/Thanks.cshtml");
         }
         public IActionResult Contact()
         {
             return View();
+        }
+
+        public ActionResult Redirect()
+        {
+            return RedirectToAction("Index", "App");
         }
     }
 }
