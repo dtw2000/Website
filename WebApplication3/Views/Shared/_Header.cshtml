@@ -1,16 +1,97 @@
-﻿<header id="header">
+﻿@*<header id="header">
     <div class="inner">
         <a href="~/index" class="logo">Daniel Wilkerson</a>
-        <nav id="nav">
+        <nav id="nav">*@
             @*<!--a asp-controller="App" asp-action="Index">Home</a-->
             <!--a asp-controller="App" asp-action="Resume">Resume</a-->
             <!--a asp-controller="App" asp-action="Contact">Contact</a-->*@
-            <a href="~/">Home</a>
+            @*<a href="~/">Home</a>
             <a href="~/Resume">Resume</a>
             <a href="~/Comments">Comments</a>
-            <a href="~/Contact">Contact</a>
+            <a href="~/Contact">Contact</a>*@
             @*<a href="~/Hobbies">Hobbies</a>*@
-        </nav>
+        @*</nav>
         <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
     </div>
+</header>*@
+<header id="header">
+    <div class="inner">
+        <a href="~/index" class="logo">Daniel Wilkerson</a>
+        @*<nav id="nav">*@
+        <nav id="navPanel" class="mobile">
+            <ul>
+                <li>
+                    <a href="~/">Home</a>
+                </li>
+                <li>
+                    <a href="~/Resume">Resume</a>
+                </li>
+                <li class="sub-nav">
+                    <a href="~/Comments">Comments</a>
+                    <ul>
+                        <li><a href="~/API/Comments">API</a></li>
+                        <li><a href="~/API/Comments/daniel">Example</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="~/Contact">Contact</a>
+                </li>
+            </ul>
+            <a href="#navPanel" class="close"></a>
+        </nav>
+    </div>
 </header>
+<style>
+    .desktop nav > ul {
+        display: inline-block !important;
+    }
+
+    .desktop  nav > ul > li {
+        display: inline-block !important;
+        position: relative;
+        vertical-align: text-top;
+    }
+
+    .desktop > ul > li > ul {
+        display: block !important;
+        padding-left: 0 !important;
+        text-align: left;
+    }
+
+    .desktop nav > ul > li > ul > li {
+        display: block !important;
+        padding-left: 0;
+    }
+
+
+    /********************/
+
+    .mobile{
+        display:none;
+    }
+    .mobile.visible{
+        display:block;
+    }
+    .mobile a {
+        border-top: solid 1px rgba(255, 255, 255, 0.25);
+        color: #d4e0ef;
+        font-weight: 600;
+        display: block;
+        padding: 0.75em 0;
+        text-decoration: none;
+        font-weight: 300;
+        text-align: left;
+    }
+
+    .mobile ul {
+        margin: 0 !important;
+    }
+
+    .mobile * {
+        display: block;
+    }
+
+    .mobile > ul {
+        padding-left: 0 !important;
+    }
+</style>
