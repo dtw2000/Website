@@ -40,27 +40,24 @@
 	// Off-Canvas Navigation.
 
 		// Navigation Panel.
-			//$(
-			//	'<div id="navPanel">' +
-			//		$('#nav').html() +
-			//		'<a href="#navPanel" class="close"></a>' +
-			//	'</div>'
-			//)
-			//	.appendTo($body)
-			//	.panel({
-			//		delay: 500,
-			//		hideOnClick: true,
-			//		hideOnSwipe: true,
-			//		resetScroll: true,
-			//		resetForms: true,
-			//		side: 'left'
-			//	});
-            //$('#header').onclick = function () {
+			$(
+				'<div id="navPanel">' +
+					$('#nav').html() +
+					'<a href="#navPanel" class="close"></a>' +
+				'</div>'
+			)
+				.appendTo($body)
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					side: 'left'
+				});
+            //$('#header').on('click', function (e) {
             //    $('#navPanel').toggleClass('visible');
-            //};
-            $('#header').on('click', function (e) {
-                $('#navPanel').toggleClass('visible');
-            });
+            //});
 
 		// Fix: Remove transitions on WP<10 (poor/buggy performance).
 			if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
